@@ -3,7 +3,11 @@
 
 Déterminer à partir d'une image le nombre de pièces présentes et calculer la somme totale (en euros).
 
+## Tech Stack
 
+- Language : Python 3
+- Librairies : NumPy, OpenCV
+  
 
 
 ## Usage
@@ -15,6 +19,10 @@ Déterminer à partir d'une image le nombre de pièces présentes et calculer la
 ## Données
 
 Le jeu de données est constitué de 106 images couleurs aux formats .jpeg, .jpg, .png. Certaines images présentent des défauts d'éclairage, un fond non homogène, les pièces se chavauchent parfois et peuvent être retournées sur certaines images.
+
+## Implémentation
+
+## Tests et évaluation 
 
 
 ## Authors
