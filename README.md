@@ -1,7 +1,7 @@
 
 # Reconnaissance de Pièces
 
-Déterminer à partir d'une image le nombre de pièces présentes et calculer la somme totale (en euros).
+Le but de projet est de déterminer à partir d'une image le nombre de pièces présentes sur cette dernière et calculer la valeur monétaire totale (en euros).
 
 ## Tech Stack
 
@@ -18,7 +18,7 @@ Déterminer à partir d'une image le nombre de pièces présentes et calculer la
 
 ## Données
 
-Le jeu de données est constitué de 106 images couleurs aux formats .jpeg, .jpg, .png. Certaines images présentent des défauts d'éclairage, un fond non homogène, les pièces se chavauchent parfois et peuvent être retournées sur certaines images.
+Le jeu de données est constitué de 106 images couleurs aux formats .jpeg, .jpg, .png. Certaines images présentent des défauts d'éclairage, un fond non homogène, les pièces se chevauchent parfois et peuvent être retournées sur certaines images.
 
 ## Implémentation
 
