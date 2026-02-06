@@ -1,5 +1,6 @@
 import cv2
 import numpy as np
+from utils import load_safe_cv2
 
 def get_hsv_stats(img_hsv, mask):
     """Calcule la teinte et saturation moyennes dans une zone masquée"""
@@ -80,7 +81,8 @@ def classifier_expert(roi_img):
 
 def detecter_et_identifier(chemin_image):
     # --- 1. CHARGEMENT & RESIZE ---
-    img = cv2.imread(chemin_image)
+    #img = cv2.imread(chemin_image)
+    img = load_safe_cv2(chemin_image)
     if img is None:
         print(f"Erreur lecture: {chemin_image}")
         return
