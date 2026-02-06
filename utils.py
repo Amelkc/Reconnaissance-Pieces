@@ -1,6 +1,8 @@
 #fonctions utiles pour éviter redondance code et faciliter les tests
 import matplotlib.pyplot as plt
 import cv2 as cv
+from PIL import Image
+import numpy as np
 
 def show_image(img, title):
     plt.imshow(img, cmap='gray')
@@ -20,3 +22,10 @@ def dessin_cercle(img,num_labels, stats, centroids, aire_min):
         # rayon approximatif
         r = int(0.5 * (w + h) / 2)
         cv.circle(img_debug, (int(cx), int(cy)), r, (0, 0, 255), 2)
+    show_image(img_debug, "debug")
+
+
+def load_safe_cv2(path_img):
+    img_pil = Image.open(path_img)
+    img_bgr = cv.cvtColor(np.array(img_pil), cv.COLOR_RGB2BGR)
+    return img_bgr
