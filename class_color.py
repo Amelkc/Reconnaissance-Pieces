@@ -138,8 +138,11 @@ def detecter_et_identifier(chemin_image):
         cv2.imshow("Resultat Final", output)
         cv2.waitKey(0)
         cv2.destroyAllWindows()
+        return len(cercles)
     else:
         print("Aucune pièce trouvée. Ajustez param2 ou minDist.")
+        return 0
+    
 
 # Lancer
 
