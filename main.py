@@ -33,5 +33,6 @@ if __name__=="__main__":
         
     acc_nb = predict_nb_TRUE / NB_ECHANTILLONS
     print(f"Accuracy Compte Pièces : {acc_nb:.2f} ({predict_nb_TRUE} images correctes sur {NB_ECHANTILLONS})")
+    print("IMAGES NOMBRE ERRONÉ\n", img_nb_FALSE)
     #acc_val = predict_val_TRUE / NB_ECHANTILLONS
     #print(f"Accuracy Calcul Valeur : {acc_val:.2f} ({predict_val_TRUE} images correctes sur {NB_ECHANTILLONS})")
