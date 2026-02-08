@@ -79,13 +79,25 @@ dossier_images = "img_pieces/"
 
 
 ## Affinage avec 486 tests pour le meilleur trouvé avec 128 : 
+#dp_values        = [1.0]
+#minDist_values   = [55, 60, 65]
+#param1_values    = [60, 65, 70]
+#param2_values    = [35, 38, 41]
+#minRadius_values = [23, 25, 28]
+#maxRadius_values = [88, 92, 96]
+#blur_ksize       = [9, 11]               # on garde les deux plus performants
+
+
+## Grille de 729 tests pour affiner autour des paramètres de 0.68 d'accuracy.
+# Résultat : 0.71 d'accuracy
 dp_values        = [1.0]
-minDist_values   = [55, 60, 65]
-param1_values    = [60, 65, 70]
-param2_values    = [35, 38, 41]
-minRadius_values = [23, 25, 28]
-maxRadius_values = [88, 92, 96]
-blur_ksize       = [9, 11]               # on garde les deux plus performants
+minDist_values   = [60, 65, 70]           # autour de 65
+param1_values    = [62, 65, 68]           # léger zoom
+param2_values    = [39, 41, 43]           # autour de 41
+minRadius_values = [26, 28, 30]           # autour de 28
+maxRadius_values = [92, 96, 100]          # un peu plus large
+blur_ksize       = [7, 9, 11]             # on remet 7 en jeu
+
 
 
 
@@ -128,3 +140,29 @@ for idx, combo in enumerate(all_combos):
 print("\nMeilleurs paramètres trouvés :")
 print(f"dp={best_params[0]}, minDist={best_params[1]}, param1={best_params[2]}, param2={best_params[3]}, minRadius={best_params[4]}, maxRadius={best_params[5]}, blur_ksize={best_params[6]}")
 print(f"Accuracy : {best_accuracy:.2f} ({int(best_accuracy * total_images)} images correctes sur {total_images})")
+
+
+
+################# Recherche des images qui sont des échecs : 
+"""
+print("\nImages encore ratées avec les meilleurs paramètres :")
+errors = []
+for idx, row in df.iterrows():
+    nom = row['Nom image']
+    chemin = os.path.join("img_pieces", nom)
+    if not os.path.exists(chemin):
+        continue
+    gt = int(row['Nombre de pièces'])
+    det = detect_number_of_coins(chemin, **best_params)
+    if det != gt:
+        diff = det - gt
+        errors.append((nom, gt, det, diff))
+
+errors.sort(key=lambda x: abs(x[3]), reverse=True)  # les plus grosses erreurs en premier
+for nom, gt, det, diff in errors[:15]:  # top 15 pires
+    print(f"{nom:12}   gt={gt:2d}   det={det:2d}   écart={diff:+3d}")
+"""
+
+
+
+
