@@ -90,14 +90,24 @@ dossier_images = "img_pieces/"
 
 ## Grille de 729 tests pour affiner autour des paramètres de 0.68 d'accuracy.
 # Résultat : 0.71 d'accuracy
-dp_values        = [1.0]
-minDist_values   = [60, 65, 70]           # autour de 65
-param1_values    = [62, 65, 68]           # léger zoom
-param2_values    = [39, 41, 43]           # autour de 41
-minRadius_values = [26, 28, 30]           # autour de 28
-maxRadius_values = [92, 96, 100]          # un peu plus large
-blur_ksize       = [7, 9, 11]             # on remet 7 en jeu
+#dp_values        = [1.0]
+#minDist_values   = [60, 65, 70]           # autour de 65
+#param1_values    = [62, 65, 68]           # léger zoom
+#param2_values    = [39, 41, 43]           # autour de 41
+#minRadius_values = [26, 28, 30]           # autour de 28
+#maxRadius_values = [92, 96, 100]          # un peu plus large
+#blur_ksize       = [7, 9, 11]             # on remet 7 en jeu
 
+
+
+
+dp_values = [1.0]                # fixé
+minDist_values = [68, 70, 72]
+param1_values = [60, 62, 64]
+param2_values = [41, 43, 45]
+minRadius_values = [24, 26, 28]
+maxRadius_values = [98, 100, 102]
+blur_ksize = [9, 11]            # les deux meilleurs
 
 
 
