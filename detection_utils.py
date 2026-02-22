@@ -60,9 +60,9 @@ def detecter_pieces_watershed(img):
 
     #recuperer les cercles
     circles = []
-    labels = np.unique(labels)
+    labels_unique = np.unique(labels)
     
-    for label in labels:
+    for label in labels_unique:
         if label <= 1: continue # 0=frontière, 1=fond
         mask = np.zeros(preprocessed.shape, dtype=np.uint8)
         mask[labels == label] = 255
