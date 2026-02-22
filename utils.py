@@ -3,6 +3,9 @@ import matplotlib.pyplot as plt
 import cv2 as cv
 from PIL import Image
 import numpy as np
+import pandas as pd
+
+PATH_DATA='data.csv'
 
 def show_image(img, title):
     plt.imshow(img, cmap='gray')
@@ -29,3 +32,13 @@ def load_safe_cv2(path_img):
     img_pil = Image.open(path_img)
     img_bgr = cv.cvtColor(np.array(img_pil), cv.COLOR_RGB2BGR)
     return img_bgr
+
+def read_data():
+    df = pd.read_csv(PATH_DATA, header=1)
+    print("DATA :")
+    print(df.head())
+    for index, row in df.iterrows():
+        nom_image = row['Nom image']
+        nb_pieces_reel = row['Nombre de pièces']
+        valeur_reelle = row['Valeur monétaire €']
+        print(f"Image : {nom_image} | Vérité : {nb_pieces_reel} pièces, {valeur_reelle} €")
