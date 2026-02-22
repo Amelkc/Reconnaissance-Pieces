@@ -1,6 +1,6 @@
 import numpy as np
 import cv2
-from prepoc import *
+from preproc import *
 
 
 def detecter_pieces_hough(img):
