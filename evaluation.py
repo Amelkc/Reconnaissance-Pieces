@@ -28,7 +28,21 @@ def evaluer(csv_path, img_folder="img_pieces/", afficher=False):
         next(reader, None) 
         
         for row_num, row in enumerate(reader, 2):  
-            img_name = row[0].strip()
+            # Ignore les lignes vides ou mal formées
+            if not row or len(row) < 3 :
+                continue
+            
+            # Ignore la ligne si c'est encore l'en-tête
+            if "Nombre" in row[1] or "somme" in row[2].lower() :
+                continue
+
+            try :
+                img_name = row[0].strip()
+                count_attendu = int(float(row[1]))
+                somme_attendue = float(row[2].replace(',', '.')) # Gère aussi les virgules françaises
+            except ValueError :
+                print(f"Ligne {row_num} ignorée (format invalide) : {row}")
+                continue
             
             #nos val attendues
             count_attendu = int(float(row[1]))
