@@ -1,11 +1,12 @@
-from test import *
-from evaluation import *
+from evaluation.test import *
+from evaluation.evaluation import *
+from config import IMG_FOLDER, IMAGES_TEST
 
 if __name__=="__main__":
     #tests utiles pour rapport et readme
         #test une seule
     print("TEST SUR UNE SEULE IMAGE : \n ")
-    image_test = "img_pieces/98.png"
+    image_test = f"{IMG_FOLDER}/98.png"
     tester_unique(imagePath=image_test)
     
         # TEST SUR PLUSIEURS
@@ -16,4 +17,4 @@ if __name__=="__main__":
     
     #evaluation finale
     print("\n[ÉVAL GT] data.csv")
-    evaluer("data.csv", afficher=False) #true pour visualiser
+    evaluer("data/data.csv", afficher=False) #true pour visualiser

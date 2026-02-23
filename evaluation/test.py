@@ -1,7 +1,7 @@
-from coinDetector import *
+from src.coinDetector import *
+from config import IMAGES_TEST
 # TEST UTILES POUR RÉDACTION RAPPORT
 
-IMAGES_TEST = ["img_pieces/12.png","img_pieces/94.jpg","img_pieces/99.png"]
 
 def tester_sur_liste(liste_images=IMAGES_TEST, afficher_chaque=False):
     """

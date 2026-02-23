@@ -5,7 +5,7 @@ from PIL import Image
 import numpy as np
 import pandas as pd
 
-PATH_DATA='data.csv'
+PATH_DATA='data/data.csv'
 
 def show_image(img, title):
     plt.imshow(img, cmap='gray')

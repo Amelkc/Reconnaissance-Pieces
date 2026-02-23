@@ -1,3 +1,8 @@
+# chemins d'accès aux modèles et aux ressources
+IMG_FOLDER = "data/img_pieces/"
+IMAGES_TEST = ["data/img_pieces/12.png","data/img_pieces/94.jpg","data/img_pieces/99.png"]
+
+
 # couleurs de référence (BGR) pour l'affichage
 COLOR_1EURO = (255, 0, 0) #bleu
 COLOR_2EUROS = (0, 255, 0) #vert

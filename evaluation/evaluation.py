@@ -2,10 +2,11 @@ import csv
 import statistics
 import math
 import os
-from coinDetector import *
+from src.coinDetector import *
+from config import IMG_FOLDER
 
 
-def evaluer(csv_path, img_folder="img_pieces/", afficher=False):
+def evaluer(csv_path, img_folder=IMG_FOLDER, afficher=False):
     """
     evaluation avec métriques standards : 
     MAE

@@ -1,7 +1,7 @@
 import cv2
-from utils import *
-from detection_utils import *
-from classify import *
+from src.utils import *
+from src.detection_utils import *
+from src.classify import *
 
 def detecter_et_identifier(chemin_image, afficher=True):
     """
