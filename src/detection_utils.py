@@ -119,7 +119,7 @@ def fusionner_cercles(circles_hough, circles_watershed, dist_k=0.6, rtol=0.3):
                 break
             
             # Si un cercle est inclus dans un autre donc si le nouveau cercle est quasiment à l'intérieur d'un existant
-            if dist + min(rw, rm) < max(rw, rm) * 1.1:
+            if dist + min(rw, rm) < max(rw, rm) * (1.0 + rtol):
                 is_duplicate = True
                 break
 

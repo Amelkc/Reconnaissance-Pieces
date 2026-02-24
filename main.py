@@ -6,7 +6,7 @@ if __name__=="__main__":
     #tests utiles pour rapport et readme
         #test une seule
     print("TEST SUR UNE SEULE IMAGE : \n ")
-    image_test = f"{IMG_FOLDER}/98.png"
+    image_test = f"{IMG_FOLDER}/42.jpg"
     tester_unique(imagePath=image_test)
     
         # TEST SUR PLUSIEURS

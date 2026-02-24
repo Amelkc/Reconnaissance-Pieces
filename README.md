@@ -157,7 +157,7 @@ python main.py
 
     - param1=64 : seuil Canny haut
 
-    - param2=43 : seuil d'accumulation
+    - param2=50 : seuil d'accumulation
 
     - minRadius=26, maxRadius=102 : plage de rayons
 
@@ -176,21 +176,21 @@ python main.py
 
     5. Extraction des contours et calcul de la circularité (filtre > 0.75)
 
-- Fonction : **fusionner_cercles(circles1, circles2, ...)**
+- Fonction : **fusionner_cercles(circles_hough, circles_watershed, ...)**
     Fusionne les résultats de Hough et Watershed en éliminant les doublons (cercles détectés par les deux méthodes).
 
     Critères de doublon :
 
-    - Distance entre centres < 0.35 × min(rayon1, rayon2)
+    - Distance entre centres < 0.6 × min(rayon1, rayon2)
 
-    - Différence de rayons < 0.25 × max(rayon1, rayon2)
+    - Différence de rayons < 0.3 × max(rayon1, rayon2)
 
     Stratégie : Par défaut, privilégie le cercle de Hough en cas d'égalité (prefer_first=True).
 
 
 ### src/classify.py - Classification des pièces
 
-- Fonction : classifier_piece(roi_img)
+- Fonction : **classifier_piece(roi_img)**
     Classifie une pièce en analysant sa couleur HSV dans deux zones :
 
     - Cœur : zone centrale (40% du rayon)
@@ -249,9 +249,9 @@ python main.py
 
     3. CLAHE (Contrast Limited Adaptive Histogram Equalization) pour normalisation locale
 
-        - clipLimit=2.0, tileGridSize=(8,8)
+        - clipLimit=1.5, tileGridSize=(8,8)
 
-    4. Flou gaussien (kernel 11×11) pour réduire le bruit
+    4. Flou gaussien (kernel 13×13) pour réduire le bruit
 
     **Sortie :** Image en niveaux de gris normalisée, prête pour Hough ou Watershed.
 
@@ -308,13 +308,13 @@ Sortie console :
 ```bash
 ## TOTAL IMAGES : 106
         COMPTAGE
-MAE: 3.71 | RMSE: 8.64
-IMAGES SANS ERREUR (%): 54.7%
-ECART-TYPE : 7.84
-MOYENNE TAUX DE DÉTECTION: 1.42
+MAE: 2.06 | RMSE: 6.18
+IMAGES SANS ERREUR (%): 71.7%
+ECART-TYPE : 5.85
+MOYENNE TAUX DE DÉTECTION: 1.01
         SOMME (EN EUROS)
-MAE €: 2.62 | RMSE €: 4.14 | MAPE %: 82.5%
-ECART-TYPE : 3.21
+MAE €: 2.71 | RMSE €: 4.08 | MAPE %: 78.4%
+ECART-TYPE : 3.06
 ```
 
 
@@ -505,22 +505,22 @@ prefer_first=True # Priorité à Hough en cas d'égalité
 
 ### Performances : 
 
-- MAE (comptage) : 3.71 pièces
-    En moyenne, 3.71 pièce d'écart par image
+- MAE (comptage) : 2.06 pièces
+    En moyenne, 2.06 pièce d'écart par image
 
-- RMSE (comptage) : 8.64 pièces
+- RMSE (comptage) : 6.18 pièces
     Racine de l'erreur quadratique moyenne
 
-- Taux exact : 54.7%	
-    54.7% des images ont un comptage parfait
+- Taux exact : 71.7%	
+    71.7% des images ont un comptage parfait
 
-- MAE (valeur)	2.62 €	
-    Erreur moyenne de 2.62 € par image
+- MAE (valeur)	2.71 €	
+    Erreur moyenne de 2.71 € par image
 
-- MAPE	82.5%	
-    Erreur relative de 82.5% sur la valeur
+- MAPE	78.4%	
+    Erreur relative de 78.4% sur la valeur
 
-- Taux de détection	1.42	
+- Taux de détection	1.01	
     Détecte en moyenne 142% des pièces présentes
 
 
