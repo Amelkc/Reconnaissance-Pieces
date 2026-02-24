@@ -59,7 +59,7 @@ projet_monnaie/
 
 ### Prérequis
 
-- Python 2.8+
+- Python 3.8+
 - pip
 
 ### Installation des dépendances
