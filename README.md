@@ -23,7 +23,7 @@ Ce projet implémente un système automatique de détection, identification et c
 ## Structure du projet
 
 ```bash
-projet_monnaie/
+Reconnaissance-Pieces/
 │
 ├── main.py                   # Point d'entrée - lance tests et évaluation
 ├── config.py                 # Configuration (couleurs, paramètres Hough/Watershed)
