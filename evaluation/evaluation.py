@@ -5,20 +5,16 @@ import os
 from src.coinDetector import *
 from config import IMG_FOLDER
 
-
 def evaluer(csv_path, img_folder=IMG_FOLDER, afficher=False):
     """
-    evaluation avec métriques standards : 
+    evaluation avec métriques : 
     MAE
-    RMSE
-    MAPE
     ecart-type
+    taux de détection
+    images sans erreur
     """
     erreurs_count = []
-    sq_erreurs_count = []
     erreurs_val = []
-    sq_erreurs_val = []
-    erreurs_sum_pct = []
     taux_detect = []  # pred/val comptage attendue
     
     # les resultats par image
@@ -60,22 +56,17 @@ def evaluer(csv_path, img_folder=IMG_FOLDER, afficher=False):
             pred_sum = resultat.get('somme', 0.0)
             
             err_count = abs(pred_count - count_attendu)
-            err_sum_abs = abs(pred_sum -  somme_attendue )
-            err_sum_pct = (err_sum_abs /  somme_attendue * 100) if  somme_attendue > 0 else 0
+            err_sum_abs = abs(pred_sum -  somme_attendue)
             
             erreurs_count.append(err_count)
             erreurs_val.append(err_sum_abs)
-            erreurs_sum_pct.append(err_sum_pct)
 
-            sq_erreurs_count.append(err_count ** 2)
-            sq_erreurs_val.append(err_sum_abs ** 2)
             taux_detect.append(pred_count / count_attendu if count_attendu > 0 else 0)
             
             resultats.append({
                 'Image': img_name,
                 'GT Count': count_attendu, 'Pred Count': pred_count, 'Err Count': err_count,
-                'GT €': f"{ somme_attendue:.2f}", 'Pred €': f"{pred_sum:.2f}", 'Err €': f"{err_sum_abs:.2f}",
-                '% Err': f"{err_sum_pct:.1f}%"
+                'GT €': f"{ somme_attendue:.2f}", 'Pred €': f"{pred_sum:.2f}", 'Err €': f"{err_sum_abs:.2f}"
             })
     
     if not resultats:
@@ -84,27 +75,23 @@ def evaluer(csv_path, img_folder=IMG_FOLDER, afficher=False):
     
     # Stats
     mae_count = statistics.mean(erreurs_count)
-    rmse_count = math.sqrt(statistics.mean(sq_erreurs_count))
     mae_val = statistics.mean(erreurs_val)
-    rmse_sum = math.sqrt(statistics.mean(sq_erreurs_val))
-    mape_sum = statistics.mean(erreurs_sum_pct)
     
-    # %img avec 0 erreur
+    # %img avec 0 erreur (pour le comptage)
     taux_exact = (sum(1 for e in erreurs_count if e == 0) / len(erreurs_count)) * 100
-    #voir si on detecte trop de pieces ou pas assez 
-    avg_taux_detect = statistics.mean(taux_detect)
     
+    # voir si on detecte trop de pieces ou pas assez 
+    avg_taux_detect = statistics.mean(taux_detect)
     
     print("\n## Tableau résultats")   
     print(f"\n## TOTAL IMAGES : {len(resultats)}")
     
-    print("\tCOMPTAGE")
-    print(f"MAE: {mae_count:.2f} | RMSE: {rmse_count:.2f}")
+    print("\n\tCOMPTAGE")
+    print(f"MAE: {mae_count:.2f}")
     print(f"IMAGES SANS ERREUR (%): {taux_exact:.1f}%")
     print(f"ECART-TYPE : {statistics.stdev(erreurs_count):.2f}")
     print(f"MOYENNE TAUX DE DÉTECTION: {avg_taux_detect:.2f}")
     
-    print("\tSOMME (EN EUROS)")
-    print(f"MAE €: {mae_val:.2f} | RMSE €: {rmse_sum:.2f} | MAPE %: {mape_sum:.1f}%")
+    print("\n\tSOMME (EN EUROS)")
+    print(f"MAE €: {mae_val:.2f}")
     print(f"ECART-TYPE : {statistics.stdev(erreurs_val):.2f}")
-

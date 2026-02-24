@@ -287,11 +287,10 @@ python main.py
     Compare les prédictions avec la vérité terrain (ground truth) contenue dans data.csv.
 
 - Métriques calculées :
-    - **MAE** : Erreur Absolue Moyenne (comptage)
-    - **RMSE** : Racine de l'Erreur Quadratique Moyenne
-    - **MAPE** : Erreur Moyenne en Pourcentage (valeur €)
-    - **Taux exact** : % d'images avec 0 erreur de comptage
-    - **Écart-type** : Dispersion des erreurs
+    - **MAE** (Mean Absolute Error) : Exprime l'erreur moyenne de manière intuitive directement dans l'unité cible (en nombre de pièces ou en euros).
+    - **Images sans erreur** : % d'images avec 0 erreur de comptage
+    - **Moyenne du taux de détection** : Ratio prédictions / réalité
+    - **Écart-type** : Mesure la dispersion des erreurs
     - **Taux de détection** : Ratio pièces détectées/réelles
 
 Format du CSV : 
@@ -307,13 +306,15 @@ Sortie console :
 
 ```bash
 ## TOTAL IMAGES : 106
+
         COMPTAGE
-MAE: 2.06 | RMSE: 6.18
+MAE: 2.06
 IMAGES SANS ERREUR (%): 71.7%
 ECART-TYPE : 5.85
 MOYENNE TAUX DE DÉTECTION: 1.01
+
         SOMME (EN EUROS)
-MAE €: 2.71 | RMSE €: 4.08 | MAPE %: 78.4%
+MAE €: 2.71
 ECART-TYPE : 3.06
 ```
 
@@ -506,22 +507,22 @@ prefer_first=True # Priorité à Hough en cas d'égalité
 ### Performances : 
 
 - MAE (comptage) : 2.06 pièces
-    En moyenne, 2.06 pièce d'écart par image
+    En moyenne, 2.06 pièce d'écart par image.
 
-- RMSE (comptage) : 6.18 pièces
-    Racine de l'erreur quadratique moyenne
+- Images sans erreur (comptage): 71.7%	
+    71.7% des images ont un comptage parfait.
 
-- Taux exact : 71.7%	
-    71.7% des images ont un comptage parfait
+- Ecart-type (comptage): 5.85 €	
+    Un écart-type de 5.85 montre une certaine instabilité : le modèle compte souvent parfaitement, mais commet occasionnellement de lourdes erreurs de comptage.
+
+- Moyenne taux de détection (comptage): 1.01
+    Le modèle surdetecte en moyenne 0.01 pièce en trop
 
 - MAE (valeur)	2.71 €	
-    Erreur moyenne de 2.71 € par image
+    Erreur moyenne de 2.71 € par image.
 
-- MAPE	78.4%	
-    Erreur relative de 78.4% sur la valeur
-
-- Taux de détection	1.01	
-    Détecte en moyenne 142% des pièces présentes
+- Ecart-type (valeur): 3.06 €	
+    L'étendue typique de la marge d'erreur autour de la MAE.
 
 
 ### Facteur influençant les performances
