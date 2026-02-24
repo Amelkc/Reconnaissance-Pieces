@@ -15,7 +15,7 @@ def detecter_pieces_hough(img):
         dp=1.0,
         minDist=70,
         param1=64,  
-        param2=43, 
+        param2=50, 
         minRadius=26,
         maxRadius=102
     )
@@ -44,7 +44,7 @@ def detecter_pieces_watershed(img):
 
     #pour mieux identifier les bords des pieces, bien distinguer du fond
     dist_transform = cv2.distanceTransform(opening, cv2.DIST_L2, 5)
-    ret, piece_sur = cv2.threshold(dist_transform, 0.5 * dist_transform.max(), 255, 0)
+    ret, piece_sur = cv2.threshold(dist_transform, 0.6 * dist_transform.max(), 255, 0)
 
     #on va identifier les regions inconnues (ca peut etre un bord de piece comme appartenir au fond on sait pas trop)
     piece_sur = np.uint8(piece_sur)
@@ -83,11 +83,55 @@ def detecter_pieces_watershed(img):
 
 
 
+def fusionner_cercles(circles_hough, circles_watershed, dist_k=0.6, rtol=0.3):
+    """
+    Cette fonction fusionne deux listes de cercles (avec élimination des doublons)
+
+    Args:
+        dist_k : ratio de distance par rapport au rayon (0.6 si les centres sont à moins de 60% du rayon l'un de l'autre, on fusionne).
+        rtol : tolérance sur la différence de rayon.
+    """
+
+    # On prépares les listes qui vont contenir les cercles donnés par Hough et Watershed
+    hough_list = []
+    if circles_hough is not None:
+        hough_list = [tuple(map(int, c)) for c in circles_hough]
+        
+    ws_list = []
+    if circles_watershed is not None:
+        ws_list = [tuple(map(int, c)) for c in circles_watershed]
+
+    # On donne la priorité à Hough
+    merged = list(hough_list)
+    
+    # On filtre les cercles obtenus par Watershed
+    for (xw, yw, rw) in ws_list:
+        is_duplicate = False
+        
+        for (xm, ym, rm) in merged:
+            # Calcul de la distance entre les centres
+            dist = ((xw - xm)**2 + (yw - ym)**2)**0.5
+            
+            # S'il y a des chevauchement relativement important (Centres proches)
+            # On augmente dist_k à 0.6 pour que la discrimination soit plus sévère
+            if dist < dist_k * min(rw, rm):
+                is_duplicate = True
+                break
+            
+            # Si un cercle est inclus dans un autre donc si le nouveau cercle est quasiment à l'intérieur d'un existant
+            if dist + min(rw, rm) < max(rw, rm) * 1.1:
+                is_duplicate = True
+                break
+
+        if not is_duplicate:
+            merged.append((xw, yw, rw))
+
+    return np.array(merged) if len(merged) > 0 else None
+
+"""
 def fusionner_cercles(circles1, circles2, dist_k=0.35, rtol=0.25, prefer_first=True):
-    """
-    fusionne deux listes de cercles (avec élimination des doublons).
-    prefer_first pour etre sur qu'on fait bien un choix si égalité (true alors on garde celui de C1)
-    """
+    #fusionne deux listes de cercles (avec élimination des doublons).
+    #prefer_first pour etre sur qu'on fait bien un choix si égalité (true alors on garde celui de C1)
     if circles1 is None and circles2 is None:
         return None
     if circles1 is None:
@@ -119,4 +163,4 @@ def fusionner_cercles(circles1, circles2, dist_k=0.35, rtol=0.25, prefer_first=T
                     merged[duplicate_idx] = (x2, y2, r2)
 
     return np.array(merged, dtype=int)
-
+"""

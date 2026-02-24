@@ -42,6 +42,11 @@ def detecter_et_identifier(chemin_image, afficher=True):
 
             #partie classification
             label_metal, couleur = classifier_piece(roi)
+
+            # Si la classification est "Inconnu", on la rejette.
+            if label_metal == "Inconnu":
+                continue # On ignore cette détection car probablement du bruit (bois, ombre)
+
             resultats.append({
                 'position': (x, y),
                 'rayon': r,
