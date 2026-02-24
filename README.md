@@ -558,3 +558,9 @@ prefer_first=True # Priorité à Hough en cas d'égalité
 
 - Implémenter un réseau de neurones (CNN) pour la classification
 
+
+## Collaborateurs
+
+- [![Avatar](https://github.com/Mmajora53.png?size=30)](https://github.com/Mmajora53) [Maria Aydin](https://github.com/Mmajora53)
+- [![Avatar](https://github.com/Amelkc.png?size=30)](https://github.com/Amelkc) [Amel Kaci](https://github.com/Amelkc)
+- [![Avatar](https://github.com/claraait123.png?size=30)](https://github.com/claraait123) [Clara Ait Mokhtar](https://github.com/claraait123)
