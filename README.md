@@ -561,6 +561,6 @@ prefer_first=True # Priorité à Hough en cas d'égalité
 
 ## Collaborateurs
 
-- (https://github.com/Mmajora53) [Maria Aydin](https://github.com/Mmajora53)
-- (https://github.com/Amelkc) [Amel Kaci](https://github.com/Amelkc)
-- (https://github.com/claraait123) [Clara Ait Mokhtar](https://github.com/claraait123)
+- [Maria Aydin](https://github.com/Mmajora53)
+- [Amel Kaci](https://github.com/Amelkc)
+- [Clara Ait Mokhtar](https://github.com/claraait123)
