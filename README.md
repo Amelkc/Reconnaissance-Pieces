@@ -46,8 +46,7 @@ projet_monnaie/
 │   └── evaluation.py         # Calcul des métriques (MAE, RMSE, MAPE)
 │
 ├── data/                     # Données du projet
-│   ├── images/               # (suggéré) Dossier pour stocker les images
-│   ├── annotations/          # (suggéré) Vérité terrain
+│   ├── img_pieces/           # Dossier pour stocker les images
 │   └── data.csv              # Fichier CSV avec ground truth (nom, nb pièces, valeur)
 │
 ├── requirements.txt          # Dépendances Python
